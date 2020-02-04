@@ -23,6 +23,7 @@ input[type="text"] {
   font-size: 20px;
   outline: none;
   width: 100%;
+
 }
 
 input::-webkit-input-placeholder {
@@ -61,11 +62,15 @@ input::-moz-placeholder {
   margin-bottom: 2rem;
 
   padding: 15px;
-  width: 70%;
+  width: 80%;
   border-radius: 5px;
   background-color: whitesmoke;
 }
 
 .rotated {
   transform: rotate(-2deg)
+}
+
+:focus::placeholder {
+  
 }
