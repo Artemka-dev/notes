@@ -11,11 +11,12 @@ function Item({ note, index }) {
     const classes = [];
 
     if (note.completed) {
-        classes.push("done")
+        classes.push("done");
+        classes.push("rotated");
     }
     return (
-        <Card className="mb-2">
-            <Card.Body className="Body flex-d">
+        <div className="note_card">
+            <div className="flex-d">
                 <span className={classes.join(' ')}>
                     <input checked={note.completed} type="checkbox" style={ {marginRight: '10px'} } onChange={() => on_change(note.id)} />
                     <strong>{index + 1})</strong>&nbsp;{note.title}
@@ -23,8 +24,8 @@ function Item({ note, index }) {
 
                 <Button variant="outline-primary" onClick={() => removeNote(note.id)}>&times;</Button>
                     
-            </Card.Body>
-        </Card>
+            </div>
+        </div>
     );
 }
 

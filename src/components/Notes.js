@@ -19,7 +19,7 @@ function Notes(props) {
             })}
 
             <Form onSubmit={submitHandler}>
-                <Button type="submit" variant="outline-info">Удалить все выбранные элементы</Button>
+                <Button className="button" type="submit">Удалить все выбранные элементы</Button>
             </Form>
         </div>
     );

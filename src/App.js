@@ -47,8 +47,8 @@ function App() {
 
     return (
         <Context.Provider value={{ on_change, removeNote, addNote }}>
-            <div className="container col-8 mt-5">
-                <h1 className="mb-4">Приложение заметки</h1>
+            <div className="container col-sm-12 col-md-12 col-lg-10 col-xl-8 mt-5">
+                <h1 className="mb-5">Приложение заметки</h1>
                 <FormNotes addNote={addNote} />
 
                 {notes.length ?
@@ -63,7 +63,8 @@ function App() {
 
 App.propTypes = {
     on_change: PropTypes.func,
-    change_out: PropTypes.func
+    change_out: PropTypes.func,
+    add_note: PropTypes.func
 }
 
 export default App;
