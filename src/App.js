@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
 import PropTypes from "prop-types";
@@ -9,12 +9,17 @@ import Notes from "./components/Notes";
 import Context from "./context";
 
 function App() {
-    const [notes, setNotes] = React.useState([
-        { id: 1, completed: false, title: "Купить хлеб" },
-        { id: 2, completed: false, title: "Купить масло" },
-        { id: 3, completed: false, title: "Купить сыр" },
-        { id: 4, completed: false, title: "Купить молоко" }
-    ]);
+    const [notes, setNotes] = React.useState([]);
+
+    useEffect(() => {
+        const _notes = localStorage.getItem("notes");
+        if (_notes) {setNotes(JSON.parse(_notes))}
+        else {setNotes([])}
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("notes", JSON.stringify(notes));
+    }, [notes])
 
 
     function on_change(id) {
