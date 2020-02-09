@@ -4,17 +4,24 @@ import './App.css';
 import PropTypes from "prop-types";
 
 import FormNotes from "./components/Form";
-import Notes from "./components/Notes";
+import Notes from "./components/Notes"; 
+import Loader from "./components/Loader";
+import Search from "./components/Search";
 
 import Context from "./context";
 
 function App() {
     const [notes, setNotes] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [text, setText] = React.useState('');
 
     useEffect(() => {
         const _notes = localStorage.getItem("notes");
-        if (_notes) {setNotes(JSON.parse(_notes))}
-        else {setNotes([])}
+        setTimeout(() => {
+            if (_notes) {setNotes(JSON.parse(_notes))}
+            else {setNotes([])}
+            setLoading(false);
+        }, 1000)
     }, [])
 
     useEffect(() => {
@@ -31,6 +38,7 @@ function App() {
 
     function removeNote(id) {
         setNotes(notes.filter(note => note.id !== id));
+        setText('');
     }
 
     function addNote(title) {
@@ -39,21 +47,32 @@ function App() {
             id: Date.now(),
             completed: false
         }]))
+        setText('');
     }
 
     function deleteAll() {
-        setNotes(notes.filter(note => !note.completed))
+        setNotes(notes.filter(note => !note.completed));
+        setText('');
     }
 
+    function changeText(event) {
+        event.preventDefault();
+
+        setText(event.target.value);
+    }
+
+
     return (
-        <Context.Provider value={{ on_change, removeNote, addNote }}>
+        <Context.Provider value={{ on_change, removeNote, addNote, text }}>
             <div className="container col-sm-12 col-md-12 col-lg-10 col-xl-8 mt-5">
+                <Search changeText={changeText} />
                 <h1 className="mb-5">Приложение заметки</h1>
                 <FormNotes addNote={addNote} />
 
+                {loading && <Loader />}
                 {notes.length ?
                     <Notes notes={notes} deleteAll={deleteAll} />
-                    : <h5>У вас нет заметок</h5>
+                    : loading ? null : <h5>У вас нет заметок</h5>
                 }
 
             </div>

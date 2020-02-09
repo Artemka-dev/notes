@@ -19,7 +19,7 @@ function FormNotes({ addNote }) {
         <input type="text" placeholder="Введите название заметки" 
             value={value} 
             onChange={event => setValue(event.target.value)} 
-            onKeyPress={submitHandler} autoFocus={true} />
+            onKeyPress={submitHandler} autoFocus={true} className="input" />
     );
 }
 
